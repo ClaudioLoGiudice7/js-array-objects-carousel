@@ -30,7 +30,7 @@
 // - DESCRIZIONE
 // CREARE UN CAROSELLO COME NELLA FOTO ALLEGATA.
 
-const images = [
+const imagesInfo = [
     {
         image: 'img/01.webp',
         title: 'Marvel\'s Spiderman Miles Morale',
@@ -62,20 +62,51 @@ container.innerHTML +=
     `
     <div class="row gx-0">
         <div class="col-9">
-            <img class="w-100 h-100 big-image rounded-start" src="./img/01.webp" alt="img1">
+            <img class="w-100 h-100 big-image rounded-start" id="bigImage" src="./img/01.webp" alt="img1">
         </div>
         <div class="col-3">
-            <img class="w-100 small-image" src="./img/01.webp" alt="img1">
-            <img class="w-100 small-image" src="./img/02.webp" alt="img2">
-            <img class="w-100 small-image" src="./img/03.webp" alt="img3">
-            <img class="w-100 small-image" src="./img/04.webp" alt="img4">
-            <img class="w-100 small-image" src="./img/05.webp" alt="img5">
-            <button type="button" class="btn btn-light rounded-circle first-button">
+            <img class="w-100 small-image" id="imgDescription" src="./img/01.webp" alt="img1">
+            <img class="w-100 small-image" id="imgDescription" src="./img/02.webp" alt="img2">
+            <img class="w-100 small-image" id="imgDescription" src="./img/03.webp" alt="img3">
+            <img class="w-100 small-image" id="imgDescription" src="./img/04.webp" alt="img4">
+            <img class="w-100 small-image" id="imgDescription" src="./img/05.webp" alt="img5">
+            <button type="button" class="btn btn-light rounded-circle first-button" id="upButton">
                 <i class="fa-solid fa-angle-up"></i>
             </button>
-            <button type="button" class="btn btn-light rounded-circle second-button">
+            <button type="button" class="btn btn-light rounded-circle second-button" id="downButton">
                 <i class="fa-solid fa-angle-down"></i>
             </button>
         </div>
     </div>
     `
+
+// Milestone 1:
+// Ora rimuoviamo i contenuti statici e usiamo l'array di oggetti letterali per popolare dinamicamente il carosello.
+// Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+
+// Milestone 2:
+// Aggiungere il ** ciclo infinito ** del carosello.Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso destra, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sinistra.
+
+const images = ["./img/01.webp", "./img/02.webp", "./img/03.webp", "./img/04.webp", "./img/05.webp",];
+
+currentImage = 0;
+
+const upButton = document.getElementById("upButton");
+const downButton = document.getElementById("downButton");
+const bigImage = document.getElementById("bigImage");
+
+upButton.addEventListener(
+    "click",
+    function () {
+        currentImage = (currentImage + images.length - 1) % images.length;
+        bigImage.src = images[currentImage];
+    }
+);
+
+downButton.addEventListener(
+    "click",
+    function () {
+        currentImage = (currentImage + 1) % images.length;
+        bigImage.src = images[currentImage];
+    }
+);
